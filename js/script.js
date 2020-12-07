@@ -1,33 +1,82 @@
-/******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
-******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
+const quotes = [
+  {
+    quote: 'I am incapable of conceiving infinity, and yet I do not accept finity. I want this adventure that is the context of my life to go on without end.',
+    source: 'Simone de Beauvoir'
+  },
+  {
+    quote: "I think that little by little I'll be able to solve my problems and survive.",
+    source: 'Frida Kahlo',
+    occupation: 'painter'
+  },
+  {
+    quote: 'The beginning is always today.',
+    source: 'Mary Shelley'
+  },
+  {
+    quote: 'It is good to have an end to journey toward; but it is the journey that matters, in the end.',
+    source: 'Ursula Le Guin'
+  },
+  {
+    quote: 'If you surrendered to the air, you could ride it.',
+    source: 'Toni Morrison',
+    citation: 'Song of Solomon',
+    year: 1977
+  },
+];
 
-/*** 
- * `quotes` array 
-***/
+// Returns a random object from the 'quotes' array
+function getRandomQuote(arr) {
+  let arrIndex = Math.floor(Math.random() * arr.length);
+  return arr[arrIndex];
+}
+
+// Prints the random object selected via getRandomQuote function
+function printQuote() {
+  let randomQuote = getRandomQuote(quotes);
+  let generateHTML = `
+    <p class="quote">${randomQuote.quote}</p>
+    <p class="source">${randomQuote.source}
+  `;
+
+  if (randomQuote.hasOwnProperty('citation')) {
+    generateHTML += `
+      <span class="citation">${randomQuote.citation}</span>
+    `;
+  }
+
+  if (randomQuote.hasOwnProperty('year')) {
+    generateHTML += `
+      <span class="year">${randomQuote.year}</span>
+    `;
+  }
+
+  if (randomQuote.hasOwnProperty('occupation')) {
+    generateHTML += `
+      <span class="year">${randomQuote.occupation}</span>
+    `;
+  }
+
+  generateHTML += `</p>`
+  document.getElementById('quote-box').innerHTML = generateHTML;
+}
 
 
+// Randomly select color from array and make it background color
+function changeBackground() {
+  let colors = ['rgb(58, 193, 98)', 'rgb(139, 58, 193)', 'rgb(36, 53, 209)', 'rgb(209, 154, 36)', 'rgb(209, 36, 36)'];
+  let colorsIndex = Math.floor(Math.random() * colors.length);
+  document.querySelector('body').style.backgroundColor = (`${colors[colorsIndex]}`);
+}
 
-/***
- * `getRandomQuote` function
-***/
+// Displays different random quote and changes background color when button is clicked
+document.getElementById('load-quote').addEventListener("click", () => {
+  printQuote();
+  changeBackground();
+});
 
-
-
-/***
- * `printQuote` function
-***/
-
-
-
-/***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
-***/
-
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
+// Displays different random quote and changes background color at 30 second intervals
+setInterval(function () {
+  printQuote();
+  changeBackground();
+}, 30000);
