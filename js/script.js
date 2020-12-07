@@ -1,7 +1,7 @@
 
 const quotes = [
   {
-    quote: 'I am incapable of conceiving infinity, and yet I do not accept finity. I want this adventure that is the context of my life to go on without end.',
+    quote: 'I want this adventure that is the context of my life to go on without end.',
     source: 'Simone de Beauvoir'
   },
   {
